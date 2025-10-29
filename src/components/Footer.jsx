@@ -8,8 +8,8 @@ import { FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div style={{height:'300px',background:'brown'}}>
-        <div className='d-flex justify-content-center align-items-center p-5 flex-column'>
+    <div style={{height:'300px',background:'brown',overflow: 'hidden'}}>
+        <div className='d-flex justify-content-center align-items-center p-5 flex-column' style={{ marginBottom: 0 }}>
             <h1 className='text-white'>Contact Us</h1>
             <h5 className='text-white fw-bold' > <IoMdMail /> resumebuilder@gmail.com</h5>
             <h5 className='text-white fw-bold'><FaPhoneAlt /> 8078085653</h5>
@@ -22,7 +22,11 @@ function Footer() {
                   <FaInstagram />
               </div>
               
+              
             </div>
+            <div className=' justify-content-center align-items-center'>
+                <p className='mb-0'>All rights reserved</p>
+              </div>
         </div>
 
     </div>

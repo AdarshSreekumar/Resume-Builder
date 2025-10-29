@@ -6,10 +6,14 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { FaCircleXmark } from "react-icons/fa6";
 
 const steps = ['Basic Information', 'Contact Details', 'Education Details', 'Work Expperience', 'Skills & Certifications', 'Review & Submit'];
 
 function Userinputs() {
+
+  const skillSuggestionArray=["NODE JS", "HTML", "CSS", "MONGODB", "REACT", "ANGULAR", "JAVASCRIPT","LEADERSHIP","COMMUNICATION", "LEARNING", "POWER BI", "MS EXCEL"]
+
  const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -106,7 +110,36 @@ function Userinputs() {
         
          case 4: return(
             <div>
+                <h3>Skills</h3>
+                <div className='d-flex align-items-center justify-content-between p-3'>
+                  <input type="text" placeholder='Add skill' className='w-100' />
+                  <Button variant="text">ADD</Button>
+
+                </div>
+                <h5>Suggestions</h5>
+                <div className='d-flex flex-wrap justify-content-between my-3'>
+                  {
+                    skillSuggestionArray.map((item,index)=>(
+                       <Button key={index} variant="outlined" className='m-1'>{item}</Button>
+                    ))
+                  }
+
+                </div>
+                <h5>Added Skills :</h5>
+                <div className='d-flex flex-wrap justify-content-between my-3'>
+                  
+                  <Button variant="contained">NODE JS <FaCircleXmark className='ms-2 cursor-pointer'/></Button>
+                    
+                </div>
+            </div>
+        )
+         case 5: return(
+            <div>
                 <h3>Summary</h3>
+                <div className="p-3 row">
+                  <TextField id="standard-basic-summary" label="Write a short summary of yourself" variant="standard" multiline rows={3} defaultValue={"A strong full stack developer resume summary includes your years of experience, key technologies, and quantifiable achievements, such as a summary like: Full Stack Developer with 5+ years of experience building scalable web applications using React, Node.js, and MongoDB. Proven track record of improving application performance by 30% and reducing load times by 20%"} />
+                </div>
+              
             </div>
         )
         default : return null
