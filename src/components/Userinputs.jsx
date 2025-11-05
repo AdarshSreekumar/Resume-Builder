@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { FaCircleXmark } from "react-icons/fa6";
 import { addResumeAPI } from '../services/allAPI';
+import { useNavigate } from 'react-router-dom';
 
 const steps = ['Basic Information', 'Contact Details', 'Education Details', 'Work Expperience', 'Skills & Certifications', 'Review & Submit'];
 
@@ -45,6 +46,9 @@ function Userinputs({resumeDetails,setResumeDetails}) {
 
   // reference to skill input tag
   const skillRef=React.useRef()
+
+  // to navigate
+  const navigate=useNavigate()
 
   
   console.log(resumeDetails);
@@ -209,16 +213,29 @@ const addSkill=(skill)=>{
     if (!username && !jobTitle && !location) {
       alert("Please fill the form completely")
     }else{
+      // api
       console.log("Api call");
       try {
         const result = await addResumeAPI(resumeDetails)
+        console.log(result);
+
+        if (result.status==201) {
+          alert("Resume added Successfully!!")
+          const {id} = result.data
+          // success redirect view page
+          navigate(`/resume/${id}/view`)
+
+        }
+        
       } catch (error) {
+        console.log(error);
+        
         
       }
       
     }
-    // api
-    // success redirect view page
+    
+    
   }
 
   return (
@@ -280,12 +297,7 @@ const addSkill=(skill)=>{
             <Button onClick={handleAddResume}>Finish</Button>
              :
              <Button onClick={handleNext}>Next</Button> }
-            {/* <Button onClick={handleNext}>Next</Button> */}
-              {/* {activeStep === steps.length - 1 ? 'Finish' : 'Next'} */}
             
-
-            {/* <Button onClick={handleAddResume}>Finish</Button> */}
-
           </Box>
         </React.Fragment>
       )}
