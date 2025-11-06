@@ -28,7 +28,7 @@ function Header() {
             <Link to={'/'} className='text-white text-decoration-none'>Resume Builder</Link>
           </Typography>
           
-          <Tooltip title={projectInfo}><Button color="inherit">Login</Button></Tooltip>
+          <Tooltip title={projectInfo}><Button color="inherit">About Us</Button></Tooltip>
         </Toolbar>
       </AppBar>
     </Box>
