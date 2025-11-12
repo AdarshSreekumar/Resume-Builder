@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { FaCircleXmark } from "react-icons/fa6";
+import { updateResumeAPI } from '../services/allAPI';
 
 const style = {
   position: 'absolute',
@@ -46,6 +47,31 @@ const addSkill=(skill)=>{
     setResumeDetails({...resumeDetails,userSkills:resumeDetails.userSkills.filter(item=>item!=skill)})
   }
 
+  // for resume update
+  const handleResumeUpdate= async ()=>{
+    const {id,username,jobTitle,location}=resumeDetails
+    if (!username && !jobTitle && !location) {
+      alert("Please fill the form completely")
+    }else{
+      // api
+      console.log("Api Call");
+      try{
+        const result =await updateResumeAPI(id,resumeDetails)
+        console.log(result);
+        if (result.status==200) {
+          alert("Resume Updated Successfully!!")
+          handleClose()
+        }
+        
+        
+      }catch(err){
+        console.log(err);
+        
+
+      }
+    }
+  }    
+
   return (
     <div>
         <button onClick={handleOpen} className='btn fs-4 text-warning'><FaEdit/></button>
@@ -64,7 +90,7 @@ const addSkill=(skill)=>{
             <div>
                     <h3>Personal Details</h3>
                     <div className=" row p-3">
-                    <TextField  value={resumeDetails.username} onChange={e=>resumeDetails({...resumeDetails,username:e.target.value})} id="standard-basic-name" label="Full Name" variant="standard" />
+                    <TextField  value={resumeDetails.username} onChange={e=>setResumeDetails({...resumeDetails,username:e.target.value})} id="standard-basic-name" label="Full Name" variant="standard" />
                     <TextField  value={resumeDetails.jobTitle} onChange={e=>setResumeDetails({...resumeDetails,jobTitle:e.target.value})} id="standard-basic-job" label="Job Title" variant="standard" />
                     <TextField  value={resumeDetails.location} onChange={e=>setResumeDetails({...resumeDetails,location:e.target.value})} id="standard-basic-location" label="Location" variant="standard" />
                     </div>
@@ -137,7 +163,7 @@ const addSkill=(skill)=>{
 
             {/* button update */}
             <div className='text-start'>
-                <button className='btn btn-warning text-light'>Update</button>
+                <button onClick={handleResumeUpdate} className='btn btn-warning text-light'>Update</button>
 
             </div>
           </Box>
